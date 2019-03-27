@@ -64,6 +64,19 @@ require_once "functions.php";
                             </table>
                         </div>
                         <!-- end of invoice_head -->
+                        <!-- invoice_details -->
+                        <div class="invoice_details">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Amount in </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <!-- end of invoice_details -->
                     </form>
                 </div>
                 <!-- end of invoice form -->
