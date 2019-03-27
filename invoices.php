@@ -14,24 +14,8 @@ require_once "functions.php";
             $header = "Invoices";
             include "includes/nav.php";
             include "includes/header.php";
+            include "includes/sub-menu.php";
             ?>
-            <!-- sub-menu -->
-            <div class="sub-menu">
-                <form action="#" method="post">
-                    <ul>
-                        <li>
-                            <button type="button" name="button" onclick="location.href='new_invoice.php';">Create New</button>
-                        </li>
-                        <li>
-                            <input type="text" name="search" id="search" placeholder="Search">
-                        </li>
-                        <li>
-                            <button type="button" name="buttonSearch" id="buttonSearch">Search</button>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-            <!-- end of sub-menu -->
             <main>
                 <!-- report table -->
                 <div class="report table">
@@ -51,6 +35,17 @@ require_once "functions.php";
                         <tbody>
                             <?php
                             $rows_invoices = table_invoices('select_all', NULL, NULL);
+                            foreach ($rows_invoices as $row_invoices) {
+                                echo "<tr>";
+                                echo "<td>".$row_invoices->Invoice_no."</td>";
+                                echo "<td>".date("d-M-y", strtotime($row_invoices->Invoice_date))."</td>";
+                                echo "<td>".$row_invoices->MMK."</td>";
+                                echo "<td>".$row_invoices->USD."</td>";
+                                echo "<td>".$row_invoices->Status."</td>";
+                                echo "<td>".date("d-M-y",strtotime($row_invoices->Paid_date))."</td>";
+                                echo "<td>".$row_invoices->Method."</td>";
+                                echo "<td><a href=\"edit_invoice.php?Invoice_no=$row_invoices->Invoice_no\">View</a></td>";
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -59,5 +54,6 @@ require_once "functions.php";
             </main>
         </div>
         <!-- end of content -->
+        <?php include "includes/footer.html"; ?>
     </body>
 </html>

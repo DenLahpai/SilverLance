@@ -29,21 +29,6 @@ body {
     ;
 }
 
-main {
-    grid-area: main;
-}
-
-main div ul li {
-    padding: 6px;
-    text-align: center;
-    list-style: none;
-    display: block;
-}
-
-main div form input {
-    padding: 6px;
-}
-
 header {
     grid-area: header;
     text-align: center;
@@ -77,13 +62,73 @@ nav ul li {
     list-style: none;
 }
 
-button {
+.sub-menu ul li input {
+    padding: 6px;
+}
+
+main {
+    grid-area: main;
+}
+
+main div ul li {
+    padding: 6px;
+    text-align: center;
+    list-style: none;
+    display: block;
+}
+
+main div form input {
+    padding: 6px;
+}
+
+.report table {
+    margin: 6px auto;
+    border-collapse: collapse;
+}
+
+.report table thead tr th {
+    border: 1px solid #b7b7b7;
     padding: 6px 12px;
+}
+
+.report table tbody tr td {
+    border: 1px solid #b7b7b7;
+    padding: 6px 12px;
+}
+
+.invoice_head table {
+    margin: 6px auto;
+    border-collapse: collapse;
+}
+
+.invoice_head table thead tr td {
+    border: 1px solid #b7b7b7;
+    padding: 6px 12px;
+}
+
+.invoice_head textarea {
+    width: 100%;
+    height: 3em;
+    resize: none;
+}
+
+.invoice_head table thead tr td input {
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+
+button {
+    padding: 12px 21px;
     border: 1px solid white;
     background-color: #e16f26;
     color: white;
     border-radius: 3px;
     cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    color: black;
 }
 
 footer {

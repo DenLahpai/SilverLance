@@ -24,4 +24,21 @@ function table_users ($job, $var1, $var2) {
     }
 }
 
+//function to use data from the table invoices
+function table_invoices ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT * FROM invoices ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
 ?>
