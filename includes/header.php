@@ -1,0 +1,3 @@
+<header>
+    <h3><?php echo $header; ?></h3>
+</header>

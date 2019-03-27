@@ -1,0 +1,96 @@
+/*Variables */
+:root {
+    --theme-color2: #e16f26;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "helvetica";
+}
+
+body {
+    background: #b7b7b7;
+}
+
+.content {
+    background: #FFF;
+    padding: 3px 12px;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+    " header header header "
+    " nav nav nav "
+    " sub-menu sub-menu sub-menu "
+    " section section section "
+    " main main main "
+    " aside aside aside "
+    ;
+}
+
+main {
+    grid-area: main;
+}
+
+main div ul li {
+    padding: 6px;
+    text-align: center;
+    list-style: none;
+    display: block;
+}
+
+main div form input {
+    padding: 6px;
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+}
+
+nav {
+    grid-area: nav;
+}
+
+nav ul {
+    margin-left: 120px;
+}
+
+nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 3px 12px;
+}
+
+.sub-menu {
+    grid-area: sub-menu;
+    text-align: center;
+}
+
+.sub-menu ul {
+    margin: 6px auto;
+}
+
+.sub-menu ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+button {
+    padding: 6px 12px;
+    border: 1px solid white;
+    background-color: #e16f26;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+footer {
+    padding: 24px;
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
