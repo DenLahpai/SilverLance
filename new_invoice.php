@@ -3,7 +3,7 @@ require_once "functions.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $currency = $_REQUEST['currency'];
-    echo $Invoice_no = table_invoices ('generate_invoice_no', NULL, NULL);
+    $Invoice_no = table_invoices ('generate_invoice_no', NULL, NULL);
     //inserting invoice_head
     table_invoice_heads ('insert', $Invoice_no, NULL);
     //inserting invoice_details
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $header = "New Invoice";
             include "includes/nav.php";
             include "includes/header.php";
-            include "includes/sub-menu.php";
+            // include "includes/sub-menu.php";
             ?>
             <main>
                 <!-- invoice form -->
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </td>
                                         <td>
                                             Invoice Date:
-                                            <input type="date" name="Invoice_date" id="Inovice_date" value="<? echo date("Y-m-d");?>">
+                                            <input type="date" name="Invoice_date" id="Invoice_date" value="<? echo date("Y-m-d");?>">
                                         </td>
                                     </tr>
                                     <tr>

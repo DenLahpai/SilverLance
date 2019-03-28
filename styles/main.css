@@ -134,6 +134,47 @@ main div form input {
     background: red;
 }
 
+.page-header table {
+    margin: 3px auto;
+}
+
+.page-header table tr td {
+    padding: 6px 12px;
+}
+
+.page-header table thead tr td img {
+    width: 180px;
+}
+
+.page-header table thead td {
+    border-bottom: 1px solid #b7b7b7;
+}
+
+.page-header table tr td ul li {
+    list-style: none;
+    padding: 3px 12px;
+}
+
+.invoice-body h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.invoice-body table {
+    margin: 6px auto;
+    border-collapse: collapse;
+}
+
+.invoice-body table tr th {
+    border: 1px solid #b7b7b7;
+    padding: 3px 12px;
+}
+
+.invoice-body table tr td {
+    border: 1px solid #b7b7b7;
+    padding: 3px 12px;
+}
+
 button {
     padding: 12px 21px;
     border: 1px solid white;

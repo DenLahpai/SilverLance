@@ -54,9 +54,46 @@ function table_invoices ($job, $var1, $var2) {
             else {
                 $Invoice_no = $year.'-'.$num;
             }
+            return $Invoice_no;
             break;
 
-            return $Invoice_no;
+        case 'insert':
+            //$var1 = Invoice_no
+            //$var2 = sum
+            $Clients_ref = trim($_REQUEST['Clients_ref']);
+            $Invoice_date = $_REQUEST['Invoice_date'];
+            $currency = $_REQUEST['currency'];
+            $query = "INSERT INTO invoices (
+                Invoice_no,
+                Invoice_date,
+                Clients_ref,
+                $currency,
+                Status
+                ) VALUES (
+                :Invoice_no,
+                :Invoice_date,
+                :Clients_ref,
+                :sum,
+                :Status
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':Invoice_no', $var1);
+            $database->bind(':Invoice_date', $Invoice_date);
+            $database->bind(':Clients_ref', $Clients_ref);
+            $database->bind(':sum', $var2);
+            $database->bind(':Status', 'Invoiced');
+            if ($database->execute()) {
+                header("location: edit_invoice.php?Invoice_no=$var1");
+            }
+            break;
+
+        case 'select_one':
+            $query = "SELECT * FROM invoices WHERE Invoice_no = :Invoice_no ;";
+            $database->query($query);
+            $database->bind(':Invoice_no', $var1);
+            return $r = $database->resultset();
+            break;
 
         default:
             // code...
@@ -84,9 +121,10 @@ function table_invoice_heads ($job, $var1, $var2) {
                 ) VALUES(
                 :Invoice_no,
                 :Bill_to,
-                Address,
-                City,
-                Country
+                :Address,
+                :City,
+                :Country,
+                :Attn
                 )
             ;";
             $database->query($query);
@@ -95,7 +133,17 @@ function table_invoice_heads ($job, $var1, $var2) {
             $database->bind(':Address', $Address);
             $database->bind(':City', $City);
             $database->bind(':Country', $Country);
+            $database->bind(':Attn', $Attn);
             $database->execute();
+            break;
+
+        case 'select_one':
+            $query = "SELECT * FROM invoice_heads
+                WHERE Invoice_no = :Invoice_no
+            ;";
+            $database->query($query);
+            $database->bind(':Invoice_no', $var1);
+            return $r = $database->resultset();
             break;
 
         default:
@@ -114,7 +162,7 @@ function table_invoice_details ($job, $var1, $var2) {
         case 'insert':
             $i = 1;
             while ($i <= 20) {
-                $Description = trim($_REQUEST['Description$i']);
+                $Description = trim($_REQUEST["Description$i"]);
                 $amount = $_REQUEST["amount$i"];
                 $query = "INSERT INTO invoice_details (
                     Invoice_no,
@@ -131,20 +179,31 @@ function table_invoice_details ($job, $var1, $var2) {
                 $database->bind(':Description', $Description);
                 $database->bind(':amount', $amount);
                 $database->execute();
-                $i;
+                $i++;
             }
             break;
 
         case 'get_sum':
-            $query = "SELECT SUM($var2) AS $var2 FROM Invoice_details
+            $query = "SELECT SUM($var2) AS $var2 FROM invoice_details
                 WHERE Invoice_no = :Invoice_no
             ;";
             $database->query($query);
             $database->bind(':Invoice_no', $var1);
+            $rows = $database->resultset();
             foreach ($rows as $row) {
                 $sum = $row->$var2;
             }
             return $sum;
+            break;
+
+        case 'select_one_invoice':
+
+            $query = "SELECT * FROM invoice_details
+                WHERE Invoice_no = :Invoice_no
+            ;";
+            $database->query($query);
+            $database->bind(':Invoice_no', $var1);
+            return $r = $database->resultset();
             break;
 
         default:
