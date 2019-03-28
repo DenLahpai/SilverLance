@@ -1,5 +1,20 @@
 <?php
 require_once "functions.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $currency = $_REQUEST['currency'];
+    echo $Invoice_no = table_invoices ('generate_invoice_no', NULL, NULL);
+    //inserting invoice_head
+    table_invoice_heads ('insert', $Invoice_no, NULL);
+    //inserting invoice_details
+    table_invoice_details ('insert', $Invoice_no, $currency);
+    //getting the sum
+    $sum = table_invoice_details ('get_sum', $Invoice_no, $currency);
+    //inserting Invoices
+    table_invoices ('insert', $Invoice_no, $sum);
+
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -52,8 +67,8 @@ require_once "functions.php";
                                     </tr>
                                     <tr>
                                         <td>
+                                            Attn:
                                             <input type="text" name="Attn" id="Attn" placeholder="Attention">
-                                            Attn:    klczx nklbvcgotepijvm,h8jcxm, 9ercx
                                         </td>
                                         <td>
                                             Clients Reference:
@@ -70,10 +85,29 @@ require_once "functions.php";
                                 <thead>
                                     <tr>
                                         <th>Date</th>
-                                        <th>Description</th>
+                                        <th colspan="2">Description</th>
                                         <th>Amount in </th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    <?php
+                                    $i = 1;
+                                    while ($i <= 20) {
+                                        include "includes/invoice_details.php";
+                                        $i++;
+                                    }
+                                    ?>
+                                    <tr>
+                                        <th colspan="4">
+                                            <select id="currency" name="currency">
+                                                <option value="">Select One</option>
+                                                <option value="MMK">MMK</option>
+                                                <option value="USD">USD</option>
+                                            </select>
+                                            <button type="button" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Bill_to', 'Invoice_date', 'currency');">Submit</button>
+                                        </th>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <!-- end of invoice_details -->
@@ -84,4 +118,5 @@ require_once "functions.php";
         </div>
         <!-- end of content -->
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
