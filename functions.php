@@ -95,6 +95,28 @@ function table_invoices ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'update':
+            // $var1 = Invoice_no
+            //$var2 = currency
+            $Clients_ref = trim($_REQUEST['Clients_ref']);
+            $Invoice_date = $_REQUEST['Invoice_date'];
+            $total = $_REQUEST['total'];
+            $query = "UPDATE invoices SET
+                Clients_ref = :Clients_ref,
+                Invoice_date = :Invoice_date,
+                $var2 = :total
+                WHERE Invoice_no = :Invoice_no
+            ;";
+            $database->query($query);
+            $database->bind(':Clients_ref', $Clients_ref);
+            $database->bind(':Invoice_date', $Invoice_date);
+            $database->bind(':total', $total);
+            $database->bind(':Invoice_no', $var1);
+            if ($database->execute()) {
+                header("location: edit_invoice.php?Invoice_no=$var1");
+            }
+            break;
+
         default:
             // code...
             break;
@@ -144,6 +166,32 @@ function table_invoice_heads ($job, $var1, $var2) {
             $database->query($query);
             $database->bind(':Invoice_no', $var1);
             return $r = $database->resultset();
+            break;
+
+        case 'update':
+            // $var1 = Invoice_no
+            $Bill_to = trim($_REQUEST['Bill_to']);
+            $Address = trim($_REQUEST['Address']);
+            $City = trim($_REQUEST['City']);
+            $Country = trim($_REQUEST['Country']);
+            $Attn = trim($_REQUEST['Attn']);
+
+            $query = "UPDATE invoice_heads SET
+                Bill_to = :Bill_to,
+                Address = :Address,
+                City = :City,
+                Country = :Country,
+                Attn = :Attn
+                WHERE Invoice_no = :Invoice_no
+            ;";
+            $database->query($query);
+            $database->bind(':Bill_to', $Bill_to);
+            $database->bind(':Address', $Address);
+            $database->bind(':City', $City);
+            $database->bind(':Country', $Country);
+            $database->bind(':Attn', $Attn);
+            $database->bind(':Invoice_no', $var1);
+            $database->execute();
             break;
 
         default:
@@ -204,6 +252,28 @@ function table_invoice_details ($job, $var1, $var2) {
             $database->query($query);
             $database->bind(':Invoice_no', $var1);
             return $r = $database->resultset();
+            break;
+
+        case 'update':
+            // $var1 = $Invoice_no
+            // $var2 = $currency
+            $i = 1;
+            while ($i <= 20) {
+                $Id = $_REQUEST["Id$i"];
+                $Description = trim($_REQUEST["Description$i"]);
+                $amount = $_REQUEST["amount$i"];
+                $query = "UPDATE invoice_details SET
+                    Description = :Description,
+                    $var2 = :amount
+                    WHERE Id = :Id
+                ;";
+                $database->query($query);
+                $database->bind(':Id', $Id);
+                $database->bind(':Description', $Description);
+                $database->bind(':amount', $amount);
+                $database->execute();
+                $i++;
+            }
             break;
 
         default:

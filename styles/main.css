@@ -175,6 +175,21 @@ main div form input {
     padding: 3px 12px;
 }
 
+.invoice_details table tr td:nth-of-type(even) {
+    width: 480px;
+}
+
+.invoice_details table tr td input {
+    width: 100%;
+}
+
+.invoice_details table tbody tr th input {
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
 button {
     padding: 12px 21px;
     border: 1px solid white;
@@ -196,4 +211,8 @@ footer {
 
 .bold {
     font-weight: bold;
+}
+
+.invisible {
+    display: none;
 }
