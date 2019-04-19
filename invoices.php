@@ -44,7 +44,8 @@ require_once "functions.php";
                                 echo "<td>".$row_invoices->Status."</td>";
                                 echo "<td>".date("d-M-y",strtotime($row_invoices->Paid_date))."</td>";
                                 echo "<td>".$row_invoices->Method."</td>";
-                                echo "<td><a href=\"edit_invoice.php?Invoice_no=$row_invoices->Invoice_no\">View</a></td>";
+                                echo "<td><a href=\"edit_invoice.php?Invoice_no=$row_invoices->Invoice_no\">View</a>&nbsp;";
+                                echo "<a href=\"receipt.php?Invoice_no=$row_invoices->Invoice_no\">Receipt</a></td>";
                             }
                             ?>
                         </tbody>

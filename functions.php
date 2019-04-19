@@ -117,6 +117,24 @@ function table_invoices ($job, $var1, $var2) {
             }
             break;
 
+        case 'receipt':
+            // $var1 = $Invoice_no
+            $Method = $_REQUEST['Method'];
+            $Paid_date = $_REQUEST['Paid_date'];
+            $query = "UPDATE invoices SET
+                Method = :Method,
+                Paid_date = :Paid_date
+                WHERE Invoice_no = :Invoice_no
+            ;";
+            $database->query($query);
+            $database->bind(':Method', $Method);
+            $database->bind(':Paid_date', $Paid_date);
+            $database->bind(':Invoice_no', $var1);
+            if ($database->execute()) {
+                header("location: receipt.php?Invoice_no=$var1");
+            }
+            break;
+
         default:
             // code...
             break;

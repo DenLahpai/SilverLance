@@ -175,6 +175,10 @@ main div form input {
     padding: 3px 12px;
 }
 
+.invoice-body ul li {
+    padding: 12px;
+}
+
 .invoice_details table tr td:nth-of-type(even) {
     width: 480px;
 }
